@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const JWT_PASSWORD = "123123";
 
@@ -13,8 +13,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
     try {
         const decoded = jwt.verify(token as string, JWT_PASSWORD);
         if (decoded) {
-            //@ts-ignore
-            req.userId = decoded._id;
+            req.userId = (decoded as JwtPayload)._id;
             next();
         } else {
             res.status(403).json({ message: "Invalid token" });
