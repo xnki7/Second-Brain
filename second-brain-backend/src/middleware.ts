@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const JWT_PASSWORD = "123123";
+const JWT_PASSWORD = "!23123";
 
 export const userMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
